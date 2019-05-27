@@ -18,12 +18,26 @@ async function gql(query: String): Promise<any> {
 }
 
 (async () => {
-
     const r = await gql(`{
         viewer {
             login
         }
+        repository(owner:"sunfmin", name:"notebook") {
+            issues(last:20) {
+                edges {
+                    node {
+                        title
+                        url
+                    }
+                }
+            }
+        }
     }`)
 
     console.log(r.data.viewer.login)
+    console.log("---")
+    for (let issue of r.data.repository.issues.edges) {
+        console.log(`${issue.node.title} | href=${issue.node.url}`)
+    }
+
 })();
