@@ -36,8 +36,10 @@ async function gql(query: String): Promise<any> {
 
     console.log(r.data.viewer.login)
     console.log("---")
+    console.log("Notebook")
     for (let issue of r.data.repository.issues.edges) {
-        console.log(`${issue.node.title} | href=${issue.node.url}`)
+        console.log(`--${issue.node.title} | href=${issue.node.url}`)
     }
+    console.log("---")
 
 })();
